@@ -1,6 +1,6 @@
 # Bytebase Login Action
 
-Use this action to login to your Bytebase server in the GitHub CI.
+Use this action to log in to your Bytebase server in the GitHub CI.
 
 ## Usage Example
 
