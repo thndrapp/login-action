@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Login Bytebase
-        uses: bytebase/bytebase-login-action@main
+        uses: bytebase/login-action@main
         with:
           bytebase-url: "<Your Bytebase server external URL>"
           service-key: ${{ secrets.BYTEBASE_SERVICE_KEY }}
