@@ -1,0 +1,31 @@
+name: 'Bytebase Login'
+description: 'Login to your Bytebase service'
+inputs:
+  bytebase-url:
+    description: "The Bytebase instance URL, should be the Bytebase external URL"
+    required: true
+  api-version:
+    description: "Bytebase API version"
+    required: false
+    default: "v1"
+  service-key:
+    description: "The Bytebase service account key"
+    required: true
+  service-secret:
+    description: "The Bytebase service account secret"
+    required: true
+outputs:
+  token:
+    description: "The API token obtained from bytebase/login action"
+    value: ${{ steps.bytebase-login.outputs.token }}
+runs:
+  using: "composite"
+  steps:
+    - name: Login
+      id: bytebase-login
+      shell: bash
+      run: |
+        $GITHUB_ACTION_PATH/main.sh
+branding:
+  icon: "database"
+  color: "gray-dark"
