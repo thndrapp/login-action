@@ -25,7 +25,7 @@ runs:
       id: bytebase-login
       shell: bash
       run: |
-        $GITHUB_ACTION_PATH/main.sh
+        $GITHUB_ACTION_PATH/main.sh --url="${{ inputs.bytebase-url }}" --version="${{ inputs.api-version }}" --service-key="${{ inputs.service-key }}" --service-secret="${{ inputs.service-secret }}"
 branding:
   icon: "database"
   color: "gray-dark"
