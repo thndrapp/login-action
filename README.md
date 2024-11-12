@@ -30,3 +30,8 @@ jobs:
             -H 'Authorization: Bearer ${{ steps.bytebase-login.outputs.token }}' \
             -H 'Content-Type: application/json; charset=utf-8'
 ```
+
+## Outputs
+
+- `token`: Login result, the service account token.
+- `api_url`: Bytebase API URL with version.
