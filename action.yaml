@@ -18,6 +18,9 @@ outputs:
   token:
     description: "The API token obtained from bytebase/login action"
     value: ${{ steps.bytebase-login.outputs.token }}
+  api_url:
+    description: "The Bytebase API URL with version"
+    value: ${{ steps.bytebase-login.outputs.api_url }}
 runs:
   using: "composite"
   steps:
