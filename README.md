@@ -24,7 +24,9 @@ jobs:
           bytebase-url: ${{ secrets.BYTEBASE_URL }}
           service-key: ${{ secrets.BYTEBASE_SERVICE_KEY }}
           service-secret: ${{ secrets.BYTEBASE_SERVICE_SECRET }}
-      - name: Output
+      - name: List projects
         run: |
-          echo "[DONOT DO THIS IN PROD] the token is: ${{ steps.bytebase-login.outputs.token }}"
+          curl "${{ steps.bytebase-login.outputs.api_url }}/projects" \
+            -H 'Authorization: Bearer ${{ steps.bytebase-login.outputs.token }}' \
+            -H 'Content-Type: application/json; charset=utf-8'
 ```
