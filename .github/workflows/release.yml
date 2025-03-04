@@ -1,37 +1,19 @@
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "VERSION"
+name: 'Release'
 
-name: Create Release
+on:
+  release:
+    types: [published]
 
 jobs:
-  build:
-    name: Create Release
+  release:
+    name: 'Release'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Get Version
-        id: get-version
-        run: |
-          verion=`cat VERSION`
-          echo "version=$verion" >> $GITHUB_OUTPUT
-      - name: Create Tag
-        uses: negz/create-tag@v1
+      - name: 'Update Tags'
+        uses: cssnr/update-version-tags-action@v1
         with:
-          version: ${{ steps.get-version.outputs.version }}
-          message: "Release ${{ steps.get-version.outputs.version }}"
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get-version.outputs.version }}
-          release_name: Release ${{ steps.get-version.outputs.version }}
-          draft: false
-          prerelease: false
+          minor: false

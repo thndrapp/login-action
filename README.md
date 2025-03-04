@@ -2,6 +2,22 @@
 
 Use this action to log in to your Bytebase server in the GitHub CI.
 
+## Inputs
+
+| Name           | Description                                                 | Required | Default |
+|----------------|-------------------------------------------------------------|----------|---------|
+| `bytebase-url` | The Bytebase instance URL, should be the Bytebase external URL | true     |         |
+| `api-version`  | Bytebase API version                                         | false    | `v1`    |
+| `service-key`  | The Bytebase service account key                              | true     |         |
+| `service-secret`| The Bytebase service account secret                           | true     |         |
+
+## Outputs
+
+| Name      | Description                                          |
+|-----------|------------------------------------------------------|
+| `token`   | The API token obtained from bytebase/login action    |
+| `api_url` | The Bytebase API URL with version                    |
+
 ## Usage Example
 
 ```yml
@@ -19,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Login Bytebase
         id: bytebase-login
-        uses: bytebase/login-action@main
+        uses: bytebase/login-action@v1
         with:
           bytebase-url: ${{ secrets.BYTEBASE_URL }}
           service-key: ${{ secrets.BYTEBASE_SERVICE_KEY }}
@@ -30,8 +46,3 @@ jobs:
             -H 'Authorization: Bearer ${{ steps.bytebase-login.outputs.token }}' \
             -H 'Content-Type: application/json; charset=utf-8'
 ```
-
-## Outputs
-
-- `token`: Login result, the service account token.
-- `api_url`: Bytebase API URL with version.
