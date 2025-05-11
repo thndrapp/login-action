@@ -14,6 +14,12 @@ inputs:
   service-secret:
     description: "The Bytebase service account secret"
     required: true
+  auth_client_id:
+    description: "The CF auth client ID"
+    required: false
+  auth_client_secret:
+    description: "The CF auth client secret"
+    required: false
 outputs:
   token:
     description: "The API token obtained from bytebase/login action"
@@ -28,7 +34,7 @@ runs:
       id: bytebase-login
       shell: bash
       run: |
-        $GITHUB_ACTION_PATH/main.sh --url="${{ inputs.bytebase-url }}" --version="${{ inputs.api-version }}" --service-key="${{ inputs.service-key }}" --service-secret="${{ inputs.service-secret }}"
+        $GITHUB_ACTION_PATH/main.sh --url="${{ inputs.bytebase-url }}" --version="${{ inputs.api-version }}" --service-key="${{ inputs.service-key }}" --service-secret="${{ inputs.service-secret }} " --auth_client_id="${{ inputs.auth_client_id }}" --auth_client_secret="${{ inputs.auth_client_secret }}"
 branding:
   icon: "database"
   color: "gray-dark"
