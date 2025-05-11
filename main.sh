@@ -24,6 +24,14 @@ case $i in
     SERVICE_SECRET="${i#*=}"
     shift
     ;;
+    --auth_client_id=*)
+    AUTH_CLIENT_ID="${i#*=}"
+    shift
+    ;;
+    --auth_client_secret=*)
+    AUTH_CLIENT_SECRET="${i#*=}"
+    shift
+    ;;
     *) # unknown option
     ;;
 esac
@@ -46,6 +54,8 @@ response=$(curl -s -w "\n%{http_code}" -X POST $LOGIN_URL \
   -H "X-Version: $ACTION_VERSION" \
   -H "X-Source: action" \
   -H "Content-Type: application/json" \
+  -H "CF-Access-Client-Id: $AUTH_CLIENT_ID" \
+  -H "CF-Access-Client-Secret: $AUTH_CLIENT_SECRET" \
   -d "$request_body")
 
 http_code=$(tail -n1 <<< "$response")
