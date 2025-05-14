@@ -67,6 +67,8 @@ if [ $http_code != 200 ]; then
     exit 1
 fi
 
+echo "$body"
+
 token=`echo $body | jq -r ".token"`
 echo "token=$token" >> $GITHUB_OUTPUT
 echo "api_url=$API_URL" >> $GITHUB_OUTPUT
